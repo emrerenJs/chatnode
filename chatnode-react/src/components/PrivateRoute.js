@@ -11,10 +11,14 @@ export default class PrivateRoute extends Component {
         }
     }
     componentDidMount() {
-        axios.get("http://localhost:3001/chat",{'Content-Type':'text/plain',withCredentials:true})
+        this.checkLoggedIn();
+    }
+
+    async checkLoggedIn(){
+        const data = await require('../static-data.json');
+        axios.get(data.api_route + data.secure_url,{'Content-Type':'text/plain',withCredentials:true})
             .then(response => response.data)
             .then(data => {
-                console.log(data);
                 if(data.status === 200){
                     this.setState({
                         loading:false,
@@ -28,7 +32,6 @@ export default class PrivateRoute extends Component {
             })
             .catch(err => console.log(err));
     }
-
 
 
     render() {

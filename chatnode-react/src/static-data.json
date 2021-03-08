@@ -1,3 +1,4 @@
 {
-    "api_route" : "http://localhost:3001"
+    "api_route" : "http://localhost:3001",
+    "secure_url" : "/security/isAuthenticated"
 }

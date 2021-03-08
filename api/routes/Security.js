@@ -1,4 +1,7 @@
 const express = require('express');
+const isAuthenticated = require('../middleware/isAuthenticated');
+const ResponseModel = require('../models/ResponseModel')
+
 const router = express.Router();
 const passportGoogle = require('../helpers/auth/GoogleAuth');
 
@@ -15,9 +18,12 @@ router.get('/google/callback', passportGoogle.authenticate(
         failureRedirect: "/"
     }),
     (req, res) => {
-        console.log(req.headers.host);
         res.redirect("/chat/route");
     }
 )
+
+router.get('/isAuthenticated',isAuthenticated,(req,res)=>{
+    res.json(ResponseModel.ok());
+})
 
 module.exports = router;
