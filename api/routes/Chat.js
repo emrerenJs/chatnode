@@ -7,7 +7,7 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/route',(req,res)=>{
-    res.redirect("http://localhost:3000/chat");
+    res.redirect("http://localhost:3000/chat");//WARNING//
 })
 
 module.exports = router;

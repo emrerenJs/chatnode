@@ -1,12 +1,8 @@
-const redis = require('redis');
+const redisHelper = require('../database/RedisClient');
 
-class UserHash{
+class UsersHash{
     constructor(){
-        const redisClientOptions = {
-            host:process.env.REDIS_URI,
-            port:process.env.REDIS_PORT
-        }
-        this.client = redis.createClient(redisClientOptions)
+        this.client = redisHelper.getClient();
     }
     upsert(connectionId, meta){
         this.client.hset(
@@ -49,4 +45,4 @@ class UserHash{
     }
 }
 
-module.exports = new UserHash();
+module.exports = new UsersHash();

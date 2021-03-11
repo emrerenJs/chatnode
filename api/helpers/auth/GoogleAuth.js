@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 
 const User = require('../../models/User');
+const appconfig = require('../../app-config.json');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.OAUTH_GOOGLE_LOGIN_CLIENTID,
@@ -15,7 +16,8 @@ passport.use(new GoogleStrategy({
         name:data.given_name,
         surname:data.family_name,
         profilePhotoUrl:data.picture
-    },(err,user)=>{
+    }, (err,user)=>{
+        user._doc._expire = Date.now() + appconfig.secureSessionLimit;
         return done(err,user);
     })
 })));

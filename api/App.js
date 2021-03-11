@@ -12,6 +12,7 @@ const cors = require('cors');
 const DatabaseHelper = require('./helpers/database/DatabaseHelper');
 const ResponseModel = require('./models/ResponseModel');
 const redisStore = require('./helpers/session/redisStore');
+const appconfig = require('./app-config.json');
 /*middlewares*/
 const isAuthenticated = require('./middleware/isAuthenticated');
 //instances
@@ -36,7 +37,7 @@ app.use(expressSession({
     saveUninitialized: true,
     cookie: {
         secure: false, /* https : true, http : false */
-        maxAge: 1000 * 60 * 2 /*2 minutes*/
+        maxAge: appconfig.secureSessionLimit
     }
 }));
 app.use(passport.initialize());
